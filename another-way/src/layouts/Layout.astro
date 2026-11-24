@@ -1,0 +1,106 @@
+---
+import '../styles/global.css';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { site, t, routes, langs, type Lang, type PageKey } from '../lib/content';
+import { getImage } from '../lib/images';
+import { getImage as optimise } from 'astro:assets';
+
+interface Props {
+  lang: Lang;
+  page: PageKey;
+  seoKey: 'accueil' | 'prestations' | 'contact' | 'mentions' | 'confidentialite';
+  /** Header sits transparently over a full-width banner */
+  overlayHeader?: boolean;
+  /** Photo used for social sharing previews */
+  ogImage?: string;
+}
+
+const { lang, page, seoKey, overlayHeader = false, ogImage } = Astro.props;
+const c = t(lang);
+const seo = c.seo[seoKey];
+const siteUrl = Astro.site!.toString().replace(/\/$/, '');
+const canonical = siteUrl + routes[lang][page];
+
+let ogUrl: string | undefined;
+const ogSrc = getImage(ogImage);
+if (ogSrc) {
+  const og = await optimise({ src: ogSrc, width: 1200, format: 'jpeg', quality: 80 });
+  ogUrl = siteUrl + og.src;
+}
+
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'LocalBusiness',
+  name: site.nom_site,
+  founder: { '@type': 'Person', name: site.nom },
+  url: siteUrl,
+  telephone: site.telephone,
+  email: site.email,
+  foundingDate: '2021',
+  areaServed: [
+    { '@type': 'City', name: 'Orléans' },
+    { '@type': 'AdministrativeArea', name: 'Loiret' },
+    { '@type': 'AdministrativeArea', name: 'Île-de-France' },
+  ],
+  sameAs: [site.instagram, site.facebook].filter(Boolean),
+  description: c.seo.accueil.description,
+  ...(ogUrl ? { image: ogUrl } : {}),
+};
+---
+
+<!doctype html>
+<html lang={lang} class="no-js">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{seo.titre}</title>
+    <meta name="description" content={seo.description} />
+    <link rel="canonical" href={canonical} />
+    {langs.map((l) => <link rel="alternate" hreflang={l} href={siteUrl + routes[l][page]} />)}
+    <link rel="alternate" hreflang="x-default" href={siteUrl + routes.fr[page]} />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <meta name="theme-color" content="#0b0b0b" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={site.nom_site} />
+    <meta property="og:title" content={seo.titre} />
+    <meta property="og:description" content={seo.description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:locale" content={lang === 'fr' ? 'fr_FR' : 'en_GB'} />
+    {ogUrl && <meta property="og:image" content={ogUrl} />}
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <script type="application/ld+json" set:html={JSON.stringify(schema)} />
+    <script is:inline>document.documentElement.classList.remove('no-js');</script>
+  </head>
+  <body class:list={{ 'has-overlay-header': overlayHeader }}>
+    <a class="skip-link" href="#contenu">{lang === 'fr' ? 'Aller au contenu' : 'Skip to content'}</a>
+    <Header lang={lang} page={page} overlay={overlayHeader} />
+    <main id="contenu">
+      <slot />
+    </main>
+    <Footer lang={lang} />
+
+    <script>
+      // Reveal elements gently as they scroll into view
+      const items = document.querySelectorAll('.reveal');
+      if ('IntersectionObserver' in window) {
+        const io = new IntersectionObserver(
+          (entries) => {
+            for (const e of entries) {
+              if (e.isIntersecting) {
+                e.target.classList.add('is-visible');
+                io.unobserve(e.target);
+              }
+            }
+          },
+          { rootMargin: '0px 0px -8% 0px', threshold: 0.08 },
+        );
+        items.forEach((el) => io.observe(el));
+      } else {
+        items.forEach((el) => el.classList.add('is-visible'));
+      }
+    </script>
+  </body>
+</html>

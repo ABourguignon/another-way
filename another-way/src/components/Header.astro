@@ -1,0 +1,291 @@
+---
+import Logo from './Logo.astro';
+import Icon from './Icon.astro';
+import { site, t, routes, otherLang, type Lang, type PageKey } from '../lib/content';
+
+interface Props {
+  lang: Lang;
+  page: PageKey;
+  overlay: boolean;
+}
+const { lang, page, overlay } = Astro.props;
+const c = t(lang);
+const r = routes[lang];
+const other = otherLang(lang);
+const links: { key: PageKey; label: string }[] = [
+  { key: 'home', label: c.menu.accueil },
+  { key: 'services', label: c.menu.prestations },
+  { key: 'contact', label: c.menu.contact },
+];
+---
+
+<header class:list={['site-header', { 'is-overlay': overlay }]} data-header>
+  <div class="site-header__inner">
+    <a href={r.home} class="site-header__logo" aria-label={`${site.nom_site} – ${c.menu.accueil}`}>
+      <Logo />
+    </a>
+
+    <button
+      class="menu-toggle"
+      type="button"
+      aria-expanded="false"
+      aria-controls="site-nav"
+      data-open-label={c.menu.ouvrir_menu}
+      data-close-label={c.menu.fermer_menu}
+      aria-label={c.menu.ouvrir_menu}
+    >
+      <span class="menu-toggle__bar"></span>
+      <span class="menu-toggle__bar"></span>
+    </button>
+
+    <div class="site-nav" id="site-nav">
+      <nav aria-label={lang === 'fr' ? 'Navigation principale' : 'Main navigation'}>
+        <ul class="site-nav__links">
+          {
+            links.map((l) => (
+              <li>
+                <a href={r[l.key]} aria-current={page === l.key ? 'page' : undefined}>
+                  {l.label}
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </nav>
+      <div class="site-nav__tools">
+        {
+          site.instagram && (
+            <a href={site.instagram} target="_blank" rel="noopener" aria-label="Instagram">
+              <Icon name="instagram" />
+            </a>
+          )
+        }
+        {
+          site.facebook && (
+            <a href={site.facebook} target="_blank" rel="noopener" aria-label="Facebook">
+              <Icon name="facebook" />
+            </a>
+          )
+        }
+        <a
+          href={routes[other][page]}
+          class="lang-switch"
+          hreflang={other}
+          lang={other}
+          title={c.menu.langue_autre_titre}
+          aria-label={c.menu.langue_autre_titre}
+        >
+          {c.menu.langue_autre}
+        </a>
+      </div>
+    </div>
+  </div>
+</header>
+
+<style>
+  .site-header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    height: var(--header-h);
+    background: var(--black);
+    color: var(--white);
+    transition:
+      background 0.45s var(--ease),
+      box-shadow 0.45s var(--ease);
+  }
+  .site-header.is-overlay {
+    position: fixed;
+    inset: 0 0 auto 0;
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.45), transparent);
+  }
+  .site-header.is-overlay.is-scrolled,
+  .site-header.is-scrolled {
+    background: rgba(11, 11, 11, 0.96);
+    box-shadow: 0 1px 0 rgba(255, 255, 255, 0.06);
+  }
+
+  .site-header__inner {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    height: 100%;
+    max-width: calc(var(--container) + 2 * var(--gutter));
+    margin-inline: auto;
+    padding-inline: var(--gutter);
+  }
+  .site-header__logo {
+    text-decoration: none;
+    color: var(--white);
+    margin-right: auto;
+    position: relative;
+    z-index: 2;
+  }
+
+  .site-nav {
+    display: flex;
+    align-items: center;
+    gap: 2.5rem;
+  }
+  .site-nav__links {
+    display: flex;
+    gap: 2.4rem;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .site-nav__links a {
+    position: relative;
+    font-size: 0.76rem;
+    font-weight: 450;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: rgba(255, 255, 255, 0.82);
+    padding-block: 0.5rem;
+    transition: color 0.3s var(--ease);
+  }
+  .site-nav__links a::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 1px;
+    background: currentColor;
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.45s var(--ease);
+  }
+  .site-nav__links a:hover,
+  .site-nav__links a[aria-current='page'] {
+    color: var(--white);
+  }
+  .site-nav__links a:hover::after,
+  .site-nav__links a[aria-current='page']::after {
+    transform: scaleX(1);
+  }
+
+  .site-nav__tools {
+    display: flex;
+    align-items: center;
+    gap: 1.1rem;
+    padding-left: 2.2rem;
+    border-left: 1px solid rgba(255, 255, 255, 0.2);
+  }
+  .site-nav__tools a {
+    display: inline-flex;
+    color: rgba(255, 255, 255, 0.8);
+    transition:
+      color 0.3s var(--ease),
+      opacity 0.3s var(--ease);
+  }
+  .site-nav__tools a:hover {
+    color: var(--white);
+  }
+  .lang-switch {
+    font-size: 0.72rem;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    text-decoration: none;
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    padding: 0.3rem 0.55rem;
+  }
+
+  .menu-toggle {
+    display: none;
+  }
+
+  @media (max-width: 960px) {
+    .menu-toggle {
+      position: relative;
+      z-index: 2;
+      display: inline-flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 7px;
+      width: 44px;
+      height: 44px;
+      padding: 0 8px;
+      background: none;
+      border: 0;
+      color: var(--white);
+      cursor: pointer;
+    }
+    .menu-toggle__bar {
+      display: block;
+      height: 1px;
+      background: currentColor;
+      transition: transform 0.4s var(--ease);
+    }
+    .menu-toggle[aria-expanded='true'] .menu-toggle__bar:first-child {
+      transform: translateY(4px) rotate(45deg);
+    }
+    .menu-toggle[aria-expanded='true'] .menu-toggle__bar:last-child {
+      transform: translateY(-4px) rotate(-45deg);
+    }
+
+    .site-nav {
+      position: fixed;
+      inset: 0;
+      z-index: 1;
+      flex-direction: column;
+      justify-content: center;
+      gap: 3rem;
+      background: var(--black);
+      opacity: 0;
+      visibility: hidden;
+      transition:
+        opacity 0.45s var(--ease),
+        visibility 0s linear 0.45s;
+    }
+    .site-nav.is-open {
+      opacity: 1;
+      visibility: visible;
+      transition:
+        opacity 0.45s var(--ease),
+        visibility 0s;
+    }
+    .site-nav__links {
+      flex-direction: column;
+      align-items: center;
+      gap: 1.6rem;
+    }
+    .site-nav__links a {
+      font-family: var(--serif);
+      font-size: 2.1rem;
+      letter-spacing: 0.01em;
+      text-transform: none;
+      font-weight: 400;
+    }
+    .site-nav__tools {
+      border-left: 0;
+      padding-left: 0;
+      gap: 1.6rem;
+    }
+  }
+</style>
+
+<script>
+  const header = document.querySelector<HTMLElement>('[data-header]');
+  const toggle = header?.querySelector<HTMLButtonElement>('.menu-toggle');
+  const nav = header?.querySelector<HTMLElement>('#site-nav');
+
+  const onScroll = () => header?.classList.toggle('is-scrolled', window.scrollY > 40);
+  onScroll();
+  window.addEventListener('scroll', onScroll, { passive: true });
+
+  const setOpen = (open: boolean) => {
+    if (!toggle || !nav) return;
+    toggle.setAttribute('aria-expanded', String(open));
+    toggle.setAttribute('aria-label', (open ? toggle.dataset.closeLabel : toggle.dataset.openLabel) || '');
+    nav.classList.toggle('is-open', open);
+    document.body.style.overflow = open ? 'hidden' : '';
+  };
+  toggle?.addEventListener('click', () => setOpen(toggle.getAttribute('aria-expanded') !== 'true'));
+  nav?.querySelectorAll('a').forEach((a) => a.addEventListener('click', () => setOpen(false)));
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') setOpen(false);
+  });
+  window.matchMedia('(min-width: 961px)').addEventListener('change', (e) => e.matches && setOpen(false));
+</script>

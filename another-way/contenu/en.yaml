@@ -1,0 +1,282 @@
+# ─────────────────────────────────────────────────────────────
+#  TEXTES DU SITE EN ANGLAIS (même structure que fr.yaml)
+#  Les noms de fichiers photo doivent être identiques à ceux de fr.yaml.
+# ─────────────────────────────────────────────────────────────
+
+menu:
+  accueil: "Home"
+  prestations: "Services & Rates"
+  contact: "Contact"
+  langue_autre: "FR"
+  langue_autre_titre: "Version française"
+  ouvrir_menu: "Open menu"
+  fermer_menu: "Close menu"
+
+seo:
+  accueil:
+    titre: "Another Way – Starting, education and training of horses | Orléans & Paris region"
+    description: "Élodie Bourguignon, professional rider: starting young horses, education, behavioural re-education and training of sport and leisure horses. Natural horsemanship approach, Orléans and Paris region (France)."
+  prestations:
+    titre: "Services & Rates – Another Way | Horse starting, lessons, training"
+    description: "Private lessons, clinics, starting and pre-starting young horses, behavioural re-education and training sessions near Orléans and in the Paris region. Detailed rates."
+  contact:
+    titre: "Contact – Another Way | Élodie Bourguignon"
+    description: "Contact Élodie Bourguignon (Another Way) for information or a quote: horse education and training near Orléans and in the Paris region."
+  mentions:
+    titre: "Legal notice – Another Way"
+    description: "Legal notice of another-way.fr."
+  confidentialite:
+    titre: "Privacy policy – Another Way"
+    description: "Privacy policy and data protection for another-way.fr."
+
+accueil:
+  banniere:
+    image: "banniere-accueil.jpg"
+    # Partie de la photo à garder visible : "haut", "centre" ou "bas"
+    cadrage: "centre"
+    # Position du texte sur la photo : "gauche" ou "droite"
+    texte_position: "droite"
+    image_alt: "Liberty work in a covered arena"
+    surtitre: "Élodie Bourguignon"
+    titre: "Another Way"
+    sous_titre: "Starting · Education · Training"
+    bouton_prestations: "Discover the services"
+    bouton_contact: "Get in touch"
+
+  approche:
+    surtitre: "The approach"
+    titre: "Another way of working with horses"
+    texte: |
+      Before even talking about riding or performance, a period of training is necessary — and too often underestimated — to lay the foundations of healthy communication.
+
+      Specialising in equine education and in the behavioural re-education of sport and leisure horses, Another Way, founded in 2021, offers its services to any professional or owner experiencing difficulties with their horses, or looking for an approach that respects the animal's physical and mental integrity.
+    piliers:
+      - titre: "Education"
+        texte: "A too often underestimated period of training, to lay the foundations of healthy communication."
+      - titre: "Respect"
+        texte: "An approach that preserves the horse's physical and mental integrity."
+      - titre: "Science"
+        texte: "An ethical method based on scientific advances in our understanding of the horse's cognitive abilities."
+
+  a_propos:
+    surtitre: "About"
+    titre: "Professional background"
+    image: "elodie.jpg"
+    image_alt: "Élodie Bourguignon with a young horse"
+    texte: |
+      Passionate about horses for as long as she can remember, Élodie Bourguignon naturally went on to earn her BPJEPS (French state riding instructor diploma) in Maisons-Laffitte. She then trained for 10 months at the education centre of Haras de Hus with Sébastien Jaulin and Robyn Arnold, before being hired there for 2 years. During that time she obtained the French Federation's Natural Horsemanship Instructor Certificate, levels 1 and 2.
+
+      She then temporarily joined Grégory Wathelet's team during the Spanish Sunshine Tour, and was later recruited by the Massa stud to start and educate their young horses for 2 years.
+
+      These experiences gave her the professional expertise she now offers under the name Another Way.
+    reperes:
+      - valeur: "BPJEPS"
+        libelle: "Maisons-Laffitte"
+      - valeur: "BFEEE 1 & 2"
+        libelle: "Natural horsemanship"
+      - valeur: "Since 2021"
+        libelle: "Another Way"
+
+  prestations:
+    surtitre: "Services"
+    titre: "Guiding each horse at its own pace"
+    bouton: "See all services and rates"
+
+  galerie:
+    surtitre: "Gallery"
+    titre: "At work"
+    fermer: "Close"
+    precedente: "Previous photo"
+    suivante: "Next photo"
+    images:
+      - fichier: "galerie-01.jpg"
+        alt: "Lungeing a young horse"
+      - fichier: "galerie-02.jpg"
+        alt: "Young horse under saddle in the arena"
+      - fichier: "galerie-03.jpg"
+        alt: "Ponying: a ridden horse leading a young horse"
+      - fichier: "galerie-04.jpg"
+        alt: "Competing on a chestnut horse"
+      - fichier: "galerie-05.jpg"
+        alt: "Horses in the paddock under the trees"
+      - fichier: "galerie-06.jpg"
+        alt: "Ridden session in the arena"
+
+  appel:
+    titre: "A project for your horse?"
+    texte: "Let's talk about its needs and your goals."
+    bouton: "Get in touch"
+
+prestations:
+  banniere:
+    image: "banniere-prestations.jpg"
+    # Partie de la photo à garder visible : "haut", "centre" ou "bas"
+    cadrage: "haut"
+    image_alt: "Ponying in an indoor arena: a ridden horse accompanying a young horse"
+    surtitre: "Services"
+    titre: "Services & Rates"
+  intro: "From private lessons to starting young horses, every service adapts to the horse, its character and its abilities."
+  libelle_tarif: "Rate"
+  bouton_devis: "Request a quote"
+  bouton_reserver: "Get in touch"
+
+  liste:
+    - nom: "Private lesson"
+      tarif: "€65"
+      image: "prestation-cours.jpg"
+      accueil: true
+      description: "One-to-one coaching for horse and rider together, to progress on the ground and in the saddle in a relationship of trust and mutual respect."
+      details: "Content is tailored to each pair's level, goals and pace."
+
+    - nom: "Clinic"
+      tarifs:
+        - libelle: "Full day"
+          prix: "€130"
+        - libelle: "Half day"
+          prix: "€70"
+      image: "prestation-stage.jpg"
+      description: "Dedicated time to explore a topic in depth: groundwork, communication, foundations of education or preparing for a specific goal."
+
+    - nom: "Savoir or Galop exam"
+      tarifs:
+        - libelle: "Savoir (natural horsemanship)"
+          prix: "€70"
+        - libelle: "Galop"
+          prix: "€50"
+      image: "prestation-examens.jpg"
+      description: "Preparation for and assessment of the French Federation's natural horsemanship Savoirs and riding Galops, supervised by an instructor holding the BPJEPS and the Natural Horsemanship Instructor Certificate."
+
+    - nom: "Assessment session"
+      tarif: "€100"
+      image: "prestation-evaluation.jpg"
+      description: "A first meeting to observe the horse, understand its needs and any difficulties, and define together the most suitable work programme."
+
+    - nom: "Horse training session"
+      tarif: "€50"
+      image: "prestation-travail.jpg"
+      accueil: true
+      description: "Establishing the basics of flatwork, physical and locomotor conditioning."
+      details: "Making the horse more practical and responsive to the aids."
+
+    - nom: "Pre-starting"
+      tarif: "€350 / month"
+      frequence: "4 sessions per week"
+      image: "prestation-pre-debourrage.jpg"
+      description: "Allows a more gradual education by establishing cues before the horse is started."
+      details: "Most of the work is done on the ground and includes hoof handling and desensitisation. Saddling and mounting depending on the youngster's physical abilities."
+
+    - nom: "Starting young horses"
+      tarif: "€700 / month"
+      frequence: "4 sessions per week"
+      image: "prestation-debourrage.jpg"
+      accueil: true
+      description: "The most important stage in a horse's life. It shapes the entire future relationship between the youngster and people, and the association the horse will make with humans."
+      details: "The aim is a confident, receptive horse that responds to the rider's aids. Every youngster is different, so it can take from one to several months depending on each horse's character and cognitive abilities."
+
+    - nom: "Behavioural re-education"
+      tarif: "On quote"
+      image: "prestation-reeducation.jpg"
+      accueil: true
+      devis: true
+      description: "Misunderstandings between people and horses can lead to unwanted or even dangerous behaviours. The aim is to understand why the horse developed these behaviours and to teach it the desired ones."
+      details: "Re-education covers many situations: loading, fear at mounting, aggressiveness, stress and anxiety…"
+
+  deplacements:
+    titre: "Travel"
+    texte: "I work near Orléans and in the Paris region, and in other areas on request. Travel costs are charged at {frais_km}, calculated from {ville_depart}."
+  mention_tva: "All rates are net – VAT not applicable (art. 293 B of the French Tax Code)."
+
+  appel:
+    titre: "A question, a project?"
+    texte: "Request a personalised quote or get in touch to talk about it."
+    bouton: "Request a quote"
+
+contact:
+  banniere:
+    image: "banniere-contact.jpg"
+    # Partie de la photo à garder visible : "haut", "centre" ou "bas"
+    cadrage: "centre"
+    image_alt: "Saddled bay horse held in hand"
+    surtitre: "Contact"
+    titre: "Let's talk about your horse"
+  intro: "For any information or quote request, call me or leave a message: I will get back to you quickly."
+  coordonnees_titre: "Contact details"
+  libelle_telephone: "Phone"
+  libelle_email: "Email"
+  libelle_zone: "Area covered"
+  zone: "Near Orléans / Paris region, other areas on request"
+  libelle_reseaux: "Social media"
+
+  formulaire:
+    titre: "Send a message"
+    nom: "Full name"
+    email: "Email address"
+    telephone: "Phone (optional)"
+    objet: "Subject"
+    objet_choisir: "Choose a subject"
+    objets:
+      - valeur: "renseignement"
+        libelle: "Information request"
+      - valeur: "devis"
+        libelle: "Quote request"
+      - valeur: "prestation"
+        libelle: "Book a service"
+      - valeur: "autre"
+        libelle: "Other"
+    message: "Message"
+    consentement: "I agree that my data will be used to answer my request, in accordance with the"
+    consentement_lien: "privacy policy"
+    envoyer: "Send message"
+    envoi_en_cours: "Sending…"
+    succes_titre: "Thank you, your message has been sent."
+    succes_texte: "I will get back to you as soon as possible."
+    erreur: "Your message could not be sent. Please try again or contact me directly by phone or email."
+    erreur_champs: "Please fill in the required fields correctly."
+    obligatoire: "Required fields"
+
+mentions:
+  titre: "Legal notice"
+  sections:
+    - titre: "Publisher"
+      texte: |
+        {nom} – {nom_site}
+        Sole proprietorship (micro-entreprise)
+        SIRET: {siret}
+        Address: {adresse}, France
+        Phone: {telephone}
+        Email: {email}
+        VAT not applicable (art. 293 B of the French Tax Code)
+    - titre: "Publication director"
+      texte: "{nom}"
+    - titre: "Hosting"
+      texte: |
+        Vercel Inc.
+        440 N Barranca Ave #4133, Covina, CA 91723, USA
+        https://vercel.com
+    - titre: "Intellectual property"
+      texte: "All content on this site (texts, photographs, logo) is the property of {nom} unless otherwise stated. Any reproduction without prior permission is prohibited."
+    - titre: "Liability"
+      texte: "The information on this site is provided for guidance only and may change at any time. Rates may change; only a written quote or confirmation is binding."
+
+confidentialite:
+  titre: "Privacy policy"
+  sections:
+    - titre: "Data controller"
+      texte: "{nom} – {nom_site}, {adresse}, France. Contact: {email}."
+    - titre: "Data collected"
+      texte: "The contact form collects your name, email address, phone number (optional), the subject of your request and your message. This data is used solely to answer your request, based on your consent."
+    - titre: "Transfer and retention"
+      texte: "Messages are sent by email through the Resend service (technical processor) and are not stored on the site. They are kept in {nom}'s mailbox for as long as needed to handle your request, and for no more than 3 years after the last contact. They are never sold or shared."
+    - titre: "Cookies"
+      texte: "This site uses no tracking or analytics cookies. Fonts are hosted on the site itself: no data is sent to third-party services when you visit."
+    - titre: "Your rights"
+      texte: "Under the GDPR, you have the right to access, rectify, erase, object to and restrict the processing of your data. To exercise these rights, write to {email}. You may also lodge a complaint with the CNIL (www.cnil.fr)."
+
+pied:
+  accroche: "Starting, education and training of horses."
+  navigation: "Navigation"
+  coordonnees: "Contact"
+  suivre: "Follow"
+  mentions: "Legal notice"
+  confidentialite: "Privacy policy"
+  droits: "All rights reserved."

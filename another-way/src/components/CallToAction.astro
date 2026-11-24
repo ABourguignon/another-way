@@ -1,0 +1,37 @@
+---
+import Icon from './Icon.astro';
+
+interface Props {
+  title: string;
+  text?: string;
+  href: string;
+  label: string;
+}
+const { title, text, href, label } = Astro.props;
+---
+
+<section class="section section--dark cta">
+  <div class="container cta__inner reveal">
+    <div>
+      <h2>{title}</h2>
+      {text && <p>{text}</p>}
+    </div>
+    <a class="btn btn--light" href={href}>{label} <Icon name="arrow" size={18} /></a>
+  </div>
+</section>
+
+<style>
+  .cta__inner {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2rem 4rem;
+  }
+  .cta h2 {
+    margin-bottom: 0.8rem;
+  }
+  .cta p {
+    font-size: 1.1rem;
+  }
+</style>

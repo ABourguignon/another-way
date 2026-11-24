@@ -1,0 +1,301 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Banner from '../components/Banner.astro';
+import Photo from '../components/Photo.astro';
+import Icon from '../components/Icon.astro';
+import Gallery from '../components/Gallery.astro';
+import CallToAction from '../components/CallToAction.astro';
+import { t, routes, paragraphs, slug, priceOf, type Lang } from '../lib/content';
+
+interface Props {
+  lang: Lang;
+}
+const { lang } = Astro.props;
+const c = t(lang);
+const h = c.accueil;
+const r = routes[lang];
+const featured = c.prestations.liste.filter((p: any) => p.accueil);
+---
+
+<Layout lang={lang} page="home" seoKey="accueil" overlayHeader ogImage={h.banniere.image}>
+  <Banner
+    tall
+    align={h.banniere.texte_position === 'droite' ? 'right' : 'left'}
+    image={h.banniere.image}
+    focus={h.banniere.cadrage}
+    alt={h.banniere.image_alt}
+    eyebrow={h.banniere.surtitre}
+    title={h.banniere.titre}
+    subtitle={h.banniere.sous_titre}
+  >
+    <div class="hero-actions">
+      <a class="btn btn--light" href={r.services}>{h.banniere.bouton_prestations} <Icon name="arrow" size={18} /></a>
+      <a class="btn btn--ghost-light" href={r.contact}>{h.banniere.bouton_contact}</a>
+    </div>
+  </Banner>
+
+  <!-- Approche -->
+  <section class="section approach">
+    <div class="container approach__grid">
+      <div class="reveal">
+        <p class="eyebrow">{h.approche.surtitre}</p>
+        <h2>{h.approche.titre}</h2>
+      </div>
+      <div class="approach__text reveal">
+        {paragraphs(h.approche.texte).map((p, i) => <p class={i === 0 ? 'lead' : ''}>{p}</p>)}
+      </div>
+    </div>
+    <div class="container">
+      <ol class="pillars">
+        {
+          h.approche.piliers.map((p: any, i: number) => (
+            <li class="pillar reveal" style={`transition-delay:${i * 120}ms`}>
+              <span class="pillar__num">0{i + 1}</span>
+              <h3>{p.titre}</h3>
+              <p>{p.texte}</p>
+            </li>
+          ))
+        }
+      </ol>
+    </div>
+  </section>
+
+  <!-- À propos -->
+  <section class="section section--grey about">
+    <div class="container about__grid">
+      <div class="about__media reveal">
+        <Photo name={h.a_propos.image} alt={h.a_propos.image_alt} widths={[500, 800, 1100]} sizes="(max-width: 900px) 100vw, 45vw" />
+      </div>
+      <div class="about__text reveal">
+        <p class="eyebrow">{h.a_propos.surtitre}</p>
+        <h2>{h.a_propos.titre}</h2>
+        {paragraphs(h.a_propos.texte).map((p) => <p>{p}</p>)}
+        <dl class="milestones">
+          {
+            h.a_propos.reperes.map((m: any) => (
+              <div>
+                <dt>{m.valeur}</dt>
+                <dd>{m.libelle}</dd>
+              </div>
+            ))
+          }
+        </dl>
+      </div>
+    </div>
+  </section>
+
+  <!-- Prestations -->
+  <section class="section services">
+    <div class="container">
+      <div class="services__head reveal">
+        <div>
+          <p class="eyebrow">{h.prestations.surtitre}</p>
+          <h2>{h.prestations.titre}</h2>
+        </div>
+        <a class="link-arrow" href={r.services}>{h.prestations.bouton} <Icon name="arrow" size={16} /></a>
+      </div>
+      <ul class="services__list">
+        {
+          featured.map((p: any, i: number) => (
+            <li class="service-tile reveal" style={`transition-delay:${(i % 4) * 100}ms`}>
+              <a href={`${r.services}#${slug(p.nom)}`}>
+                <div class="service-tile__media">
+                  <Photo name={p.image} alt={p.nom} widths={[400, 700]} sizes="(max-width: 700px) 100vw, 25vw" />
+                </div>
+                <h3>{p.nom}</h3>
+                <p class="service-tile__price">{priceOf(p)}</p>
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+      <div class="services__cta reveal">
+        <a class="btn" href={r.services}>{h.prestations.bouton} <Icon name="arrow" size={18} /></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Galerie -->
+  <section class="section section--grey">
+    <div class="container">
+      <div class="reveal gallery-head">
+        <p class="eyebrow">{h.galerie.surtitre}</p>
+        <h2>{h.galerie.titre}</h2>
+      </div>
+      <Gallery images={h.galerie.images} labels={h.galerie} />
+    </div>
+  </section>
+
+  <CallToAction title={h.appel.titre} text={h.appel.texte} href={r.contact} label={h.appel.bouton} />
+</Layout>
+
+<style>
+  .hero-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-top: 2.8rem;
+  }
+
+  .approach__grid {
+    display: grid;
+    grid-template-columns: 5fr 7fr;
+    gap: clamp(2rem, 6vw, 6rem);
+    align-items: start;
+  }
+  .approach__text .lead {
+    color: var(--black);
+    font-family: var(--serif);
+    font-size: clamp(1.45rem, 2.2vw, 1.85rem);
+    line-height: 1.45;
+  }
+  .pillars {
+    list-style: none;
+    padding: 0;
+    margin: clamp(3.5rem, 7vw, 6rem) 0 0;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    border-top: 1px solid var(--grey-300);
+  }
+  .pillar {
+    padding: 2.4rem 2.4rem 0 0;
+  }
+  .pillar + .pillar {
+    padding-left: 2.4rem;
+    border-left: 1px solid var(--grey-300);
+  }
+  .pillar__num {
+    display: block;
+    font-size: 0.75rem;
+    letter-spacing: 0.24em;
+    color: var(--grey-500);
+    margin-bottom: 1.2rem;
+  }
+  .pillar h3 {
+    margin-bottom: 0.8rem;
+  }
+  .pillar p {
+    color: var(--grey-700);
+  }
+
+  .about__grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: clamp(2.5rem, 7vw, 7rem);
+    align-items: center;
+  }
+  .about__media {
+    aspect-ratio: 4 / 5;
+    overflow: hidden;
+  }
+  .about__media :global(img),
+  .about__media :global(.photo-placeholder) {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .about__text h2 {
+    margin-bottom: 2rem;
+  }
+  .milestones {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    margin: 2.8rem 0 0;
+    padding-top: 2rem;
+    border-top: 1px solid var(--grey-300);
+  }
+  .milestones dt {
+    font-family: var(--serif);
+    font-size: 1.55rem;
+    color: var(--black);
+    line-height: 1.2;
+  }
+  .milestones dd {
+    margin: 0.3rem 0 0;
+    font-size: 0.78rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--grey-500);
+  }
+
+  .services__head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: end;
+    justify-content: space-between;
+    gap: 2rem;
+    margin-bottom: clamp(2.5rem, 5vw, 4rem);
+  }
+  .services__list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: clamp(1rem, 2vw, 1.75rem);
+  }
+  .service-tile a {
+    display: block;
+    text-decoration: none;
+  }
+  .service-tile__media {
+    aspect-ratio: 3 / 4;
+    overflow: hidden;
+    margin-bottom: 1.3rem;
+  }
+  .service-tile__media :global(img),
+  .service-tile__media :global(.photo-placeholder) {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 1.1s var(--ease);
+  }
+  .service-tile a:hover :global(img) {
+    transform: scale(1.05);
+  }
+  .service-tile h3 {
+    font-size: 1.6rem;
+    margin-bottom: 0.3rem;
+  }
+  .service-tile__price {
+    font-size: 0.8rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--grey-500);
+  }
+  .services__cta {
+    margin-top: clamp(2.5rem, 5vw, 4rem);
+    text-align: center;
+  }
+  .gallery-head {
+    margin-bottom: clamp(2.5rem, 5vw, 3.5rem);
+  }
+
+  @media (max-width: 900px) {
+    .approach__grid,
+    .about__grid {
+      grid-template-columns: 1fr;
+    }
+    .pillars {
+      grid-template-columns: 1fr;
+    }
+    .pillar,
+    .pillar + .pillar {
+      padding: 2rem 0;
+      border-left: 0;
+      border-bottom: 1px solid var(--grey-300);
+    }
+    .services__list {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+  @media (max-width: 520px) {
+    .services__list {
+      grid-template-columns: 1fr;
+    }
+    .milestones {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

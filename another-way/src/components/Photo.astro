@@ -1,0 +1,79 @@
+---
+import { Image } from 'astro:assets';
+import { getImage } from '../lib/images';
+import { isPlaceholder } from '../lib/content';
+
+interface Props {
+  name?: string;
+  alt?: string;
+  widths?: number[];
+  sizes?: string;
+  priority?: boolean;
+  class?: string;
+  /** Label shown in the placeholder frame when the photo file is missing */
+  label?: string;
+}
+
+const {
+  name,
+  alt = '',
+  widths = [480, 800, 1200, 1600],
+  sizes = '100vw',
+  priority = false,
+  class: className = '',
+  label,
+} = Astro.props;
+
+const img = getImage(name);
+const altText = isPlaceholder(alt) ? '' : alt;
+---
+
+{
+  img ? (
+    <Image
+      src={img}
+      alt={altText}
+      widths={widths.filter((w) => w <= img.width).concat(img.width < widths[0] ? [img.width] : [])}
+      sizes={sizes}
+      format="webp"
+      quality={78}
+      loading={priority ? 'eager' : 'lazy'}
+      fetchpriority={priority ? 'high' : 'auto'}
+      decoding="async"
+      class={className}
+    />
+  ) : (
+    <div class:list={['photo-placeholder', className]} role="img" aria-label={altText || label || 'Photo'}>
+      <span>
+        Photo à fournir
+        <small>src/images/{name}</small>
+      </span>
+    </div>
+  )
+}
+
+<style>
+  .photo-placeholder {
+    display: grid;
+    place-items: center;
+    width: 100%;
+    height: 100%;
+    min-height: 220px;
+    background:
+      linear-gradient(135deg, rgba(255, 255, 255, 0.04) 25%, transparent 25%) 0 0 / 24px 24px,
+      linear-gradient(160deg, #3a3a38, #1c1c1b);
+    color: rgba(255, 255, 255, 0.55);
+    text-align: center;
+    font-size: 0.72rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+  }
+  .photo-placeholder small {
+    display: block;
+    margin-top: 0.5rem;
+    letter-spacing: 0.05em;
+    text-transform: none;
+    opacity: 0.7;
+    font-size: 0.75rem;
+  }
+</style>

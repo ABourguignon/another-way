@@ -1,0 +1,47 @@
+---
+import { site } from '../lib/content';
+
+interface Props {
+  class?: string;
+}
+const { class: className = '' } = Astro.props;
+---
+
+{
+  site.logo ? (
+    <img src={'/' + site.logo.replace(/^\//, '')} alt={site.nom_site} class:list={['logo-img', className]} width="161" height="148" />
+  ) : (
+    <span class:list={['logo-wordmark', className]}>
+      <span class="logo-wordmark__main">Another</span>
+      <span class="logo-wordmark__sub">Way</span>
+    </span>
+  )
+}
+
+<style>
+  .logo-img {
+    height: 82px;
+    width: auto;
+  }
+  @media (max-width: 960px) {
+    .logo-img {
+      height: 66px;
+    }
+  }
+  :global(.site-footer) .logo-img {
+    height: 96px;
+  }
+  .logo-wordmark {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 0.35em;
+    font-family: var(--serif);
+    font-size: 1.75rem;
+    line-height: 1;
+    letter-spacing: 0.02em;
+    white-space: nowrap;
+  }
+  .logo-wordmark__sub {
+    font-style: italic;
+  }
+</style>

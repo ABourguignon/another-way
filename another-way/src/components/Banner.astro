@@ -1,0 +1,157 @@
+---
+import Photo from './Photo.astro';
+
+interface Props {
+  image: string;
+  alt: string;
+  eyebrow?: string;
+  title: string;
+  subtitle?: string;
+  /** Full-screen height (home) or shorter (inner pages) */
+  tall?: boolean;
+  /** Side of the photo where the text sits */
+  align?: 'left' | 'right';
+  /** Which part of the photo to keep when it is cropped: "haut", "centre" or "bas" */
+  focus?: string;
+}
+const { image, alt, eyebrow, title, subtitle, tall = false, align = 'left', focus = 'centre' } = Astro.props;
+const focusY = { haut: '22%', centre: '50%', bas: '80%' }[focus] ?? '50%';
+---
+
+<section class:list={['banner', { 'banner--tall': tall, 'banner--right': align === 'right' }]} style={`--focus-y:${focusY}`}>
+  <div class="banner__media">
+    <Photo name={image} alt={alt} priority widths={[640, 1024, 1600, 2200]} sizes="100vw" />
+  </div>
+  <div class="banner__content container">
+    {eyebrow && <p class="banner__eyebrow">{eyebrow}</p>}
+    {tall ? <h1 class="banner__title banner__title--xl">{title}</h1> : <h1 class="banner__title">{title}</h1>}
+    {subtitle && <p class="banner__subtitle">{subtitle}</p>}
+    <slot />
+  </div>
+</section>
+
+<style>
+  .banner {
+    position: relative;
+    display: flex;
+    align-items: flex-end;
+    min-height: clamp(420px, max(68vh, 34vw), 820px);
+    color: var(--white);
+    overflow: hidden;
+    background: var(--black);
+  }
+  .banner--tall {
+    min-height: 100svh;
+    align-items: center;
+  }
+  .banner__media {
+    position: absolute;
+    inset: 0;
+  }
+  .banner__media :global(img),
+  .banner__media :global(.photo-placeholder) {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center var(--focus-y, 50%);
+    animation: banner-zoom 14s var(--ease) both;
+  }
+  .banner__media :global(.photo-placeholder) {
+    place-items: end end;
+    padding: 1.5rem var(--gutter);
+  }
+  .banner__media::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      linear-gradient(to top, rgba(0, 0, 0, 0.72) 0%, rgba(0, 0, 0, 0.15) 55%, rgba(0, 0, 0, 0.35) 100%);
+  }
+  /* Home banner: darker on the left so the large title stays readable */
+  .banner--tall .banner__media::after {
+    background:
+      linear-gradient(90deg, rgba(0, 0, 0, 0.7) 0%, rgba(0, 0, 0, 0.35) 45%, rgba(0, 0, 0, 0.05) 75%),
+      linear-gradient(to top, rgba(0, 0, 0, 0.5) 0%, transparent 40%, rgba(0, 0, 0, 0.3) 100%);
+  }
+  .banner--right .banner__content {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    text-align: right;
+  }
+  .banner--right .banner__content :global(.hero-actions) {
+    justify-content: flex-end;
+  }
+  .banner--tall.banner--right .banner__media::after {
+    background:
+      linear-gradient(270deg, rgba(0, 0, 0, 0.7) 0%, rgba(0, 0, 0, 0.35) 40%, rgba(0, 0, 0, 0.05) 70%),
+      linear-gradient(to top, rgba(0, 0, 0, 0.5) 0%, transparent 40%, rgba(0, 0, 0, 0.3) 100%);
+  }
+  @media (max-width: 700px) {
+    .banner--right .banner__content {
+      align-items: flex-start;
+      text-align: left;
+    }
+    .banner--right .banner__content :global(.hero-actions) {
+      justify-content: flex-start;
+    }
+    /* On phones, keep the horse and rider (left part of the photo) in frame */
+    .banner--tall .banner__media :global(img) {
+      object-position: 30% var(--focus-y, 50%);
+    }
+    .banner--tall .banner__media::after,
+    .banner--tall.banner--right .banner__media::after {
+      background: linear-gradient(to top, rgba(0, 0, 0, 0.75) 0%, rgba(0, 0, 0, 0.35) 60%, rgba(0, 0, 0, 0.45) 100%);
+    }
+  }
+  .banner__content {
+    position: relative;
+    z-index: 1;
+    padding-top: calc(var(--header-h) + 3rem);
+    padding-bottom: clamp(3rem, 8vw, 6rem);
+    animation: banner-in 1.4s var(--ease) 0.15s both;
+  }
+  .banner__eyebrow {
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.8);
+    margin-bottom: 1.4rem;
+  }
+  .banner__title {
+    color: var(--white);
+    font-size: clamp(2.8rem, 6.5vw, 5.4rem);
+    max-width: 16ch;
+  }
+  .banner__title--xl {
+    font-size: clamp(3.6rem, 11vw, 9rem);
+    line-height: 0.95;
+  }
+  .banner__subtitle {
+    margin-top: 1.6rem;
+    font-size: clamp(0.85rem, 1.3vw, 1rem);
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.88);
+  }
+
+  @keyframes banner-zoom {
+    from {
+      transform: scale(1.08);
+    }
+    to {
+      transform: scale(1);
+    }
+  }
+  @keyframes banner-in {
+    from {
+      opacity: 0;
+      transform: translateY(24px);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+</style>

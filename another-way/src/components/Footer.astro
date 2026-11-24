@@ -1,0 +1,163 @@
+---
+import Logo from './Logo.astro';
+import Icon from './Icon.astro';
+import { site, t, routes, telHref, type Lang } from '../lib/content';
+
+interface Props {
+  lang: Lang;
+}
+const { lang } = Astro.props;
+const c = t(lang);
+const r = routes[lang];
+const year = new Date().getFullYear();
+---
+
+<footer class="site-footer">
+  <div class="container site-footer__grid">
+    <div class="site-footer__brand">
+      <a href={r.home} class="site-footer__logo" aria-label={site.nom_site}><Logo /></a>
+      <p>{c.pied.accroche}</p>
+    </div>
+
+    <div>
+      <h2 class="site-footer__title">{c.pied.navigation}</h2>
+      <ul>
+        <li><a href={r.home}>{c.menu.accueil}</a></li>
+        <li><a href={r.services}>{c.menu.prestations}</a></li>
+        <li><a href={r.contact}>{c.menu.contact}</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <h2 class="site-footer__title">{c.pied.coordonnees}</h2>
+      <ul>
+        <li><a href={telHref(site.telephone)}>{site.telephone}</a></li>
+        <li><a href={'mailto:' + site.email}>{site.email}</a></li>
+        <li>{c.contact.zone}</li>
+      </ul>
+    </div>
+
+    <div>
+      <h2 class="site-footer__title">{c.pied.suivre}</h2>
+      <div class="site-footer__social">
+        {
+          site.instagram && (
+            <a href={site.instagram} target="_blank" rel="noopener" aria-label="Instagram">
+              <Icon name="instagram" size={22} />
+            </a>
+          )
+        }
+        {
+          site.facebook && (
+            <a href={site.facebook} target="_blank" rel="noopener" aria-label="Facebook">
+              <Icon name="facebook" size={22} />
+            </a>
+          )
+        }
+      </div>
+    </div>
+  </div>
+
+  <div class="container site-footer__bottom">
+    <p>© {year} {site.nom_site} – {site.nom}. {c.pied.droits} SIRET {site.siret}</p>
+    <ul>
+      <li><a href={r.legal}>{c.pied.mentions}</a></li>
+      <li><a href={r.privacy}>{c.pied.confidentialite}</a></li>
+    </ul>
+  </div>
+</footer>
+
+<style>
+  .site-footer {
+    background: var(--black);
+    color: rgba(255, 255, 255, 0.62);
+    font-size: 0.95rem;
+    padding-top: clamp(4rem, 8vw, 6rem);
+  }
+  .site-footer a {
+    text-decoration: none;
+    transition: color 0.3s var(--ease);
+  }
+  .site-footer a:hover {
+    color: var(--white);
+  }
+  .site-footer ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 0.55rem;
+  }
+  .site-footer__grid {
+    display: grid;
+    grid-template-columns: 1.6fr 1fr 1.3fr 0.8fr;
+    gap: 3rem;
+    padding-bottom: 3.5rem;
+  }
+  .site-footer__logo {
+    color: var(--white);
+    display: inline-block;
+    margin-bottom: 1.2rem;
+  }
+  .site-footer__brand p {
+    max-width: 18rem;
+  }
+  .site-footer__title {
+    font-family: var(--sans);
+    font-size: 0.72rem;
+    font-weight: 500;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    color: var(--white);
+    margin-bottom: 1.3rem;
+  }
+  .site-footer__social {
+    display: flex;
+    gap: 1rem;
+  }
+  .site-footer__social a {
+    display: inline-grid;
+    place-items: center;
+    width: 46px;
+    height: 46px;
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    border-radius: 50%;
+    transition:
+      border-color 0.3s var(--ease),
+      color 0.3s var(--ease);
+  }
+  .site-footer__social a:hover {
+    border-color: var(--white);
+  }
+  .site-footer__bottom {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 1rem 2rem;
+    padding-block: 1.6rem 2rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.12);
+    font-size: 0.8rem;
+  }
+  .site-footer__bottom p {
+    margin: 0;
+  }
+  .site-footer__bottom ul {
+    display: flex;
+    gap: 1.8rem;
+  }
+
+  @media (max-width: 900px) {
+    .site-footer__grid {
+      grid-template-columns: 1fr 1fr;
+    }
+    .site-footer__brand {
+      grid-column: 1 / -1;
+    }
+  }
+  @media (max-width: 520px) {
+    .site-footer__grid {
+      grid-template-columns: 1fr;
+      gap: 2.2rem;
+    }
+  }
+</style>

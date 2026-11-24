@@ -1,0 +1,27 @@
+# ─────────────────────────────────────────────────────────────
+#  INFORMATIONS GÉNÉRALES (communes au français et à l'anglais)
+#  Modifiez la valeur après les deux-points. Gardez les guillemets.
+# ─────────────────────────────────────────────────────────────
+
+nom_site: "Another Way"
+nom: "Élodie Bourguignon"
+
+telephone: "+33 6 13 22 31 30"
+email: "contact@another-way.fr"
+
+instagram: "https://www.instagram.com/another_way_education/"
+facebook: "https://www.facebook.com/AnotherwayEducationEquine"
+
+# Logo : déposez le fichier dans le dossier public/ et indiquez son nom.
+# Laissez vide ("") pour afficher le nom du site en texte à la place.
+logo: "logo.png"
+
+# Prix au kilomètre des déplacements et ville de départ
+frais_km: "0,50 € / km"
+ville_depart: "Orléans"
+
+# ── Mentions légales (n'apparaissent que sur la page Mentions légales) ──
+statut: "Entreprise individuelle (EI), régime micro-entreprise"
+siret: "842 590 606 00021"
+adresse: "37 avenue Corot, 78110 Le Vésinet"
+mention_tva: "TVA non applicable, art. 293 B du CGI"

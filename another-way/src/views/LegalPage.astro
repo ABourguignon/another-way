@@ -1,0 +1,60 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { t, fill, type Lang } from '../lib/content';
+
+interface Props {
+  lang: Lang;
+  kind: 'mentions' | 'confidentialite';
+}
+const { lang, kind } = Astro.props;
+const c = t(lang);
+const doc = c[kind];
+---
+
+<Layout lang={lang} page={kind === 'mentions' ? 'legal' : 'privacy'} seoKey={kind}>
+  <section class="section legal">
+    <div class="container legal__inner">
+      <h1>{doc.titre}</h1>
+      {
+        doc.sections.map((s: any) => (
+          <section>
+            <h2>{s.titre}</h2>
+            {fill(s.texte)
+              .trim()
+              .split(/\n\s*\n/)
+              .map((para: string) => (
+                <p set:html={para
+                  .replace(/&/g, '&amp;')
+                  .replace(/</g, '&lt;')
+                  .replace(/\n/g, '<br />')
+                  .replace(/(https?:\/\/[^\s<]+)/g, '<a href="$1" rel="noopener">$1</a>')} />
+              ))}
+          </section>
+        ))
+      }
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .legal__inner {
+    max-width: 52rem;
+  }
+  .legal h1 {
+    font-size: clamp(2.6rem, 6vw, 4.2rem);
+    margin-bottom: 3rem;
+  }
+  .legal section + section,
+  .legal h1 + section {
+    padding-top: 2rem;
+    margin-top: 2rem;
+    border-top: 1px solid var(--grey-150);
+  }
+  .legal h2 {
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+  }
+  .legal p {
+    color: var(--grey-700);
+  }
+</style>

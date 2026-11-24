@@ -1,0 +1,417 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Banner from '../components/Banner.astro';
+import Icon from '../components/Icon.astro';
+import { site, t, routes, telHref, type Lang } from '../lib/content';
+
+interface Props {
+  lang: Lang;
+}
+const { lang } = Astro.props;
+const c = t(lang);
+const k = c.contact;
+const f = k.formulaire;
+const r = routes[lang];
+---
+
+<Layout lang={lang} page="contact" seoKey="contact" overlayHeader ogImage={k.banniere.image}>
+  <Banner image={k.banniere.image}
+    focus={k.banniere.cadrage} alt={k.banniere.image_alt} eyebrow={k.banniere.surtitre} title={k.banniere.titre} />
+
+  <section class="section">
+    <div class="container contact__grid">
+      <aside class="contact__info reveal">
+        <p class="lead">{k.intro}</p>
+        <h2 class="contact__subtitle">{k.coordonnees_titre}</h2>
+        <ul class="contact__list">
+          <li>
+            <Icon name="phone" />
+            <div>
+              <span>{k.libelle_telephone}</span>
+              <a href={telHref(site.telephone)}>{site.telephone}</a>
+            </div>
+          </li>
+          <li>
+            <Icon name="mail" />
+            <div>
+              <span>{k.libelle_email}</span>
+              <a href={'mailto:' + site.email}>{site.email}</a>
+            </div>
+          </li>
+          <li>
+            <Icon name="pin" />
+            <div>
+              <span>{k.libelle_zone}</span>
+              <p>{k.zone}</p>
+            </div>
+          </li>
+        </ul>
+        <h2 class="contact__subtitle">{k.libelle_reseaux}</h2>
+        <div class="contact__social">
+          {
+            site.instagram && (
+              <a href={site.instagram} target="_blank" rel="noopener">
+                <Icon name="instagram" /> Instagram
+              </a>
+            )
+          }
+          {
+            site.facebook && (
+              <a href={site.facebook} target="_blank" rel="noopener">
+                <Icon name="facebook" /> Facebook
+              </a>
+            )
+          }
+        </div>
+      </aside>
+
+      <div class="contact__form-wrap reveal">
+        <h2>{f.titre}</h2>
+        <form class="contact-form" method="post" action="/api/contact" novalidate data-contact-form data-lang={lang}>
+          <div class="field">
+            <label for="nom">{f.nom} *</label>
+            <input id="nom" name="nom" type="text" autocomplete="name" required maxlength="120" />
+          </div>
+          <div class="field-row">
+            <div class="field">
+              <label for="email">{f.email} *</label>
+              <input id="email" name="email" type="email" autocomplete="email" required maxlength="200" />
+            </div>
+            <div class="field">
+              <label for="telephone">{f.telephone}</label>
+              <input id="telephone" name="telephone" type="tel" autocomplete="tel" maxlength="40" />
+            </div>
+          </div>
+          <div class="field">
+            <label for="objet">{f.objet} *</label>
+            <select id="objet" name="objet" required>
+              <option value="">{f.objet_choisir}</option>
+              {f.objets.map((o: any) => <option value={o.valeur}>{o.libelle}</option>)}
+            </select>
+          </div>
+          <div class="field">
+            <label for="message">{f.message} *</label>
+            <textarea id="message" name="message" rows="7" required maxlength="5000"></textarea>
+          </div>
+
+          <!-- Anti-spam: invisible to humans -->
+          <div class="hp" aria-hidden="true">
+            <label for="site_web">Site web</label>
+            <input id="site_web" name="site_web" type="text" tabindex="-1" autocomplete="off" />
+          </div>
+
+          <div class="field field--check">
+            <input id="consentement" name="consentement" type="checkbox" value="oui" required />
+            <label for="consentement">
+              {f.consentement} <a href={r.privacy}>{f.consentement_lien}</a>. *
+            </label>
+          </div>
+
+          <p class="form-note">* {f.obligatoire}</p>
+          <p class="form-error" role="alert" hidden data-error-fields>{f.erreur_champs}</p>
+          <p class="form-error" role="alert" hidden data-error-send>{f.erreur}</p>
+
+          <button class="btn" type="submit" data-label={f.envoyer} data-sending={f.envoi_en_cours}>
+            {f.envoyer} <Icon name="arrow" size={18} />
+          </button>
+        </form>
+
+        <div class="form-success" hidden tabindex="-1" data-success>
+          <span class="form-success__icon"><Icon name="check" size={28} /></span>
+          <h3>{f.succes_titre}</h3>
+          <p>{f.succes_texte}</p>
+        </div>
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .contact__grid {
+    display: grid;
+    grid-template-columns: 5fr 7fr;
+    gap: clamp(3rem, 7vw, 7rem);
+    align-items: start;
+  }
+  .contact__info .lead {
+    margin-bottom: 3rem;
+  }
+  .contact__subtitle {
+    font-family: var(--sans);
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.26em;
+    text-transform: uppercase;
+    color: var(--grey-500);
+    margin: 0 0 1.4rem;
+  }
+  .contact__list {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 3rem;
+    display: grid;
+    gap: 1.6rem;
+  }
+  .contact__list li {
+    display: flex;
+    gap: 1.1rem;
+    align-items: flex-start;
+  }
+  .contact__list li > :global(svg) {
+    flex-shrink: 0;
+    margin-top: 0.3rem;
+    color: var(--black);
+  }
+  .contact__list span {
+    display: block;
+    font-size: 0.75rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--grey-500);
+  }
+  .contact__list a,
+  .contact__list p {
+    font-family: var(--serif);
+    font-size: 1.45rem;
+    color: var(--black);
+    text-decoration: none;
+    margin: 0;
+    line-height: 1.4;
+    word-break: break-word;
+  }
+  .contact__list a:hover {
+    text-decoration: underline;
+    text-underline-offset: 4px;
+  }
+  .contact__social {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.8rem;
+  }
+  .contact__social a {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.7rem 1.2rem;
+    border: 1px solid var(--grey-300);
+    text-decoration: none;
+    font-size: 0.85rem;
+    letter-spacing: 0.08em;
+    transition:
+      border-color 0.3s var(--ease),
+      background 0.3s var(--ease),
+      color 0.3s var(--ease);
+  }
+  .contact__social a:hover {
+    background: var(--black);
+    border-color: var(--black);
+    color: var(--white);
+  }
+
+  .contact__form-wrap {
+    background: var(--grey-50);
+    padding: clamp(1.8rem, 4.5vw, 3.5rem);
+  }
+  .contact__form-wrap h2 {
+    margin-bottom: 2rem;
+  }
+  .contact-form {
+    display: grid;
+    gap: 1.4rem;
+  }
+  .field-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.4rem;
+  }
+  .field label {
+    display: block;
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--grey-700);
+    margin-bottom: 0.5rem;
+  }
+  .field input,
+  .field select,
+  .field textarea {
+    width: 100%;
+    font: inherit;
+    font-size: 1rem;
+    color: var(--black);
+    background: var(--white);
+    border: 1px solid var(--grey-300);
+    border-radius: 0;
+    padding: 0.85rem 1rem;
+    transition: border-color 0.3s var(--ease);
+    appearance: none;
+  }
+  .field select {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' fill='none' stroke='%23262626' stroke-width='1.4'%3E%3Cpath d='m1 1.5 5 5 5-5'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 1rem center;
+    padding-right: 2.6rem;
+  }
+  .field textarea {
+    resize: vertical;
+    min-height: 160px;
+  }
+  .field input:focus,
+  .field select:focus,
+  .field textarea:focus {
+    outline: none;
+    border-color: var(--black);
+  }
+  .field [aria-invalid='true'] {
+    border-color: #9b2c2c;
+  }
+  .field--check {
+    display: flex;
+    gap: 0.8rem;
+    align-items: flex-start;
+  }
+  .field--check input {
+    width: 18px;
+    height: 18px;
+    margin-top: 0.3rem;
+    flex-shrink: 0;
+    appearance: auto;
+    accent-color: var(--black);
+  }
+  .field--check label {
+    text-transform: none;
+    letter-spacing: 0;
+    font-size: 0.9rem;
+    font-weight: 350;
+    margin: 0;
+  }
+  .hp {
+    position: absolute;
+    left: -9999px;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+  }
+  .form-note {
+    font-size: 0.8rem;
+    color: var(--grey-500);
+    margin: 0;
+  }
+  .form-error {
+    color: #9b2c2c;
+    font-size: 0.95rem;
+    margin: 0;
+  }
+  .contact-form .btn {
+    justify-self: start;
+  }
+  .contact-form .btn[disabled] {
+    opacity: 0.6;
+    cursor: wait;
+  }
+  .form-success {
+    text-align: center;
+    padding: 3rem 1rem;
+    animation: success-in 0.6s var(--ease);
+  }
+  .form-success:focus {
+    outline: none;
+  }
+  .form-success__icon {
+    display: inline-grid;
+    place-items: center;
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    background: var(--black);
+    color: var(--white);
+    margin-bottom: 1.5rem;
+  }
+  .form-success h3 {
+    margin-bottom: 0.8rem;
+  }
+  @keyframes success-in {
+    from {
+      opacity: 0;
+      transform: translateY(12px);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+
+  @media (max-width: 900px) {
+    .contact__grid {
+      grid-template-columns: 1fr;
+    }
+  }
+  @media (max-width: 560px) {
+    .field-row {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
+
+<script>
+  const form = document.querySelector<HTMLFormElement>('[data-contact-form]');
+  const success = document.querySelector<HTMLElement>('[data-success]');
+
+  if (form) {
+    // Pre-fill subject and message from links such as ?objet=devis&prestation=Débourrage
+    const params = new URLSearchParams(location.search);
+    const objet = params.get('objet');
+    const select = form.querySelector<HTMLSelectElement>('#objet');
+    if (objet && select && [...select.options].some((o) => o.value === objet)) select.value = objet;
+    const prestation = params.get('prestation');
+    const message = form.querySelector<HTMLTextAreaElement>('#message');
+    if (prestation && message && !message.value) message.value = `${prestation} – `;
+
+    const errFields = form.querySelector<HTMLElement>('[data-error-fields]')!;
+    const errSend = form.querySelector<HTMLElement>('[data-error-send]')!;
+    const button = form.querySelector<HTMLButtonElement>('button[type=submit]')!;
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      errFields.hidden = true;
+      errSend.hidden = true;
+
+      let valid = true;
+      form.querySelectorAll<HTMLInputElement>('input[required], select[required], textarea[required]').forEach((el) => {
+        const ok = el.type === 'checkbox' ? el.checked : el.checkValidity() && el.value.trim() !== '';
+        el.setAttribute('aria-invalid', String(!ok));
+        if (!ok) valid = false;
+      });
+      if (!valid) {
+        errFields.hidden = false;
+        form.querySelector<HTMLElement>('[aria-invalid=true]')?.focus();
+        return;
+      }
+
+      button.disabled = true;
+      const label = button.innerHTML;
+      button.textContent = button.dataset.sending || '…';
+      try {
+        const data = Object.fromEntries(new FormData(form).entries());
+        const res = await fetch(form.action, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ ...data, lang: form.dataset.lang }),
+        });
+        if (!res.ok) throw new Error(String(res.status));
+        form.hidden = true;
+        form.previousElementSibling?.setAttribute('hidden', '');
+        if (success) {
+          success.hidden = false;
+          success.focus();
+        }
+      } catch {
+        errSend.hidden = false;
+      } finally {
+        button.disabled = false;
+        button.innerHTML = label;
+      }
+    });
+  }
+</script>

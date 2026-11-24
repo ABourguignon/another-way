@@ -1,0 +1,299 @@
+# ─────────────────────────────────────────────────────────────
+#  TEXTES DU SITE EN FRANÇAIS
+#  • Modifiez uniquement le texte, jamais les mots avant les deux-points.
+#  • Respectez les retraits (espaces en début de ligne).
+#  • Photos : déposez le fichier dans src/images/ et écrivez son nom exact.
+#    Si le fichier n'existe pas, un cadre « Photo à fournir » s'affiche.
+#  • Tout texte entre [crochets] est provisoire et doit être complété.
+# ─────────────────────────────────────────────────────────────
+
+# ── Menu ─────────────────────────────────────────────────────
+menu:
+  accueil: "Accueil"
+  prestations: "Prestations et tarifs"
+  contact: "Contact"
+  langue_autre: "EN"
+  langue_autre_titre: "English version"
+  ouvrir_menu: "Ouvrir le menu"
+  fermer_menu: "Fermer le menu"
+
+# ── Référencement (titres et descriptions vus dans Google) ───
+seo:
+  accueil:
+    titre: "Another Way – Débourrage, éducation et travail du cheval | Orléans & Île-de-France"
+    description: "Élodie Bourguignon, cavalière professionnelle : débourrage, éducation, rééducation comportementale et travail des chevaux de sport et de loisir. Approche éthologique, Orléans et Île-de-France."
+  prestations:
+    titre: "Prestations et tarifs – Another Way | Débourrage, cours, travail du cheval"
+    description: "Cours individuels, stages, débourrage, pré-débourrage, rééducation comportementale et séances de travail du cheval près d'Orléans et en Île-de-France. Tarifs détaillés."
+  contact:
+    titre: "Contact – Another Way | Élodie Bourguignon"
+    description: "Contactez Élodie Bourguignon (Another Way) pour un renseignement ou un devis : éducation et travail du cheval près d'Orléans et en Île-de-France."
+  mentions:
+    titre: "Mentions légales – Another Way"
+    description: "Mentions légales du site another-way.fr."
+  confidentialite:
+    titre: "Politique de confidentialité – Another Way"
+    description: "Politique de confidentialité et protection des données du site another-way.fr."
+
+# ── Page d'accueil ──────────────────────────────────────────
+accueil:
+  banniere:
+    image: "banniere-accueil.jpg"
+    # Partie de la photo à garder visible : "haut", "centre" ou "bas"
+    cadrage: "centre"
+    # Position du texte sur la photo : "gauche" ou "droite"
+    texte_position: "droite"
+    image_alt: "Travail en liberté dans un manège couvert"
+    surtitre: "Élodie Bourguignon"
+    titre: "Another Way"
+    sous_titre: "Débourrage · Éducation · Travail du cheval"
+    bouton_prestations: "Découvrir les prestations"
+    bouton_contact: "Me contacter"
+
+  approche:
+    surtitre: "L'approche"
+    titre: "Une autre façon de travailler avec le cheval"
+    texte: |
+      Avant même de parler d'équitation ou de performance, une période de formation est nécessaire et trop souvent sous-estimée, afin de mettre en place les bases d'une communication saine.
+
+      Spécialisée dans l'éducation équine ainsi que dans la rééducation comportementale des chevaux de sport et de loisir, Another Way, fondée en 2021, propose ses services à tout professionnel ou propriétaire rencontrant des difficultés avec ses chevaux ou souhaitant une approche respectant l'intégrité physique et mentale de l'animal.
+    piliers:
+      - titre: "Éducation"
+        texte: "Une période de formation trop souvent sous-estimée, pour poser les bases d'une communication saine."
+      - titre: "Respect"
+        texte: "Une approche qui préserve l'intégrité physique et mentale du cheval."
+      - titre: "Science"
+        texte: "Une méthode éthique fondée sur les avancées scientifiques concernant les capacités cognitives du cheval."
+
+  a_propos:
+    surtitre: "À propos"
+    titre: "Parcours professionnel"
+    image: "elodie.jpg"
+    image_alt: "Élodie Bourguignon avec un jeune cheval"
+    texte: |
+      Passionnée par les chevaux depuis toujours, c'est tout naturellement qu'Élodie Bourguignon passe son BPJEPS à Maisons-Laffitte. Elle part ensuite se former au pôle éducation du Haras de Hus auprès de Sébastien Jaulin et Robyn Arnold pendant 10 mois, avant d'y être engagée pendant 2 ans. Durant cette période, elle valide le Brevet Fédéral d'Encadrement d'Équitation Éthologique de niveaux 1 et 2.
+
+      Elle renforce ensuite temporairement l'équipe de Grégory Wathelet lors de la tournée espagnole du Sunshine Tour, puis est recrutée par l'élevage Massa pour le débourrage et l'éducation de leurs chevaux d'élevage durant 2 ans.
+
+      Ces différentes expériences lui ont permis d'acquérir l'expertise professionnelle nécessaire pour vous proposer ses services sous le nom d'Another Way.
+    reperes:
+      - valeur: "BPJEPS"
+        libelle: "Maisons-Laffitte"
+      - valeur: "BFEEE 1 & 2"
+        libelle: "Équitation éthologique"
+      - valeur: "Depuis 2021"
+        libelle: "Another Way"
+
+  prestations:
+    surtitre: "Prestations"
+    titre: "Accompagner chaque cheval à son rythme"
+    bouton: "Voir toutes les prestations et tarifs"
+
+  galerie:
+    surtitre: "Galerie"
+    titre: "Au travail"
+    fermer: "Fermer"
+    precedente: "Photo précédente"
+    suivante: "Photo suivante"
+    images:
+      - fichier: "galerie-01.jpg"
+        alt: "Travail à la longe d'un jeune cheval"
+      - fichier: "galerie-02.jpg"
+        alt: "Jeune cheval monté en carrière"
+      - fichier: "galerie-03.jpg"
+        alt: "Ponying : un cheval monté accompagne un jeune cheval"
+      - fichier: "galerie-04.jpg"
+        alt: "En concours sur un cheval alezan"
+      - fichier: "galerie-05.jpg"
+        alt: "Chevaux au paddock sous les arbres"
+      - fichier: "galerie-06.jpg"
+        alt: "Séance montée en carrière"
+
+  appel:
+    titre: "Un projet pour votre cheval ?"
+    texte: "Parlons de ses besoins et de vos objectifs."
+    bouton: "Me contacter"
+
+# ── Page Prestations et tarifs ─────────────────────────────
+prestations:
+  banniere:
+    image: "banniere-prestations.jpg"
+    # Partie de la photo à garder visible : "haut", "centre" ou "bas"
+    cadrage: "haut"
+    image_alt: "Ponying en manège : un cheval monté accompagne un jeune cheval"
+    surtitre: "Prestations"
+    titre: "Prestations et tarifs"
+  intro: "Du cours individuel au débourrage, chaque prestation s'adapte au cheval, à son caractère et à ses capacités."
+  libelle_tarif: "Tarif"
+  bouton_devis: "Demander un devis"
+  bouton_reserver: "Me contacter"
+
+  # Liste des prestations. Pour en ajouter une, copiez un bloc complet
+  # (de « - nom: » jusqu'à la ligne avant le « - nom: » suivant).
+  #   accueil: true  → la prestation apparaît aussi sur la page d'accueil
+  #   devis: true    → le bouton propose « Demander un devis »
+  liste:
+    - nom: "Cours individuel"
+      tarif: "65 €"
+      image: "prestation-cours.jpg"
+      accueil: true
+      description: "Un accompagnement personnalisé, cavalier et cheval ensemble, pour progresser à pied comme monté dans une relation de confiance et de respect mutuel."
+      details: "Le contenu s'adapte au niveau, aux objectifs et au rythme de chaque couple."
+
+    - nom: "Stage"
+      tarifs:
+        - libelle: "1 journée"
+          prix: "130 €"
+        - libelle: "½ journée"
+          prix: "70 €"
+      image: "prestation-stage.jpg"
+      description: "Un temps dédié pour approfondir un thème : travail à pied, communication, bases de l'éducation ou préparation d'un objectif précis."
+
+    - nom: "Passage de Savoir ou de Galop"
+      tarifs:
+        - libelle: "Savoir (équitation éthologique)"
+          prix: "70 €"
+        - libelle: "Galop"
+          prix: "50 €"
+      image: "prestation-examens.jpg"
+      description: "Préparation et passage des Savoirs d'équitation éthologique (FFE) et des Galops, encadrés par une enseignante titulaire du BPJEPS et du Brevet Fédéral d'Encadrement d'Équitation Éthologique."
+
+    - nom: "Séance d'évaluation"
+      tarif: "100 €"
+      image: "prestation-evaluation.jpg"
+      description: "Une première rencontre pour observer le cheval, comprendre ses besoins et ses éventuelles difficultés, et définir ensemble le programme de travail le plus adapté."
+
+    - nom: "Séance de travail du cheval"
+      tarif: "50 €"
+      image: "prestation-travail.jpg"
+      accueil: true
+      description: "Établissement des codes de la basse école, entretien physique et locomoteur."
+      details: "Rendre le cheval plus pratique et perméable aux aides."
+
+    - nom: "Pré-débourrage"
+      tarif: "350 € / mois"
+      frequence: "4 séances par semaine"
+      image: "prestation-pre-debourrage.jpg"
+      description: "Permet une éducation plus progressive en installant des codes en amont du débourrage."
+      details: "La majeure partie du travail se fait au sol et comprend du contrôle des pieds et de la désensibilisation. Mise de la selle et montoirs suivant les capacités physiques du poulain."
+
+    - nom: "Débourrage"
+      tarif: "700 € / mois"
+      frequence: "4 séances par semaine"
+      image: "prestation-debourrage.jpg"
+      accueil: true
+      description: "Étape la plus importante dans la vie d'un cheval. Elle va déterminer et conditionner toute la future relation entre le poulain et l'homme, ainsi que l'association que le cheval va faire avec l'humain."
+      details: "Le but est de rendre le cheval confiant, réceptif et perméable aux aides du cavalier. Chaque poulain étant différent, la durée peut varier d'un à plusieurs mois suivant le caractère et les capacités cognitives de chaque cheval."
+
+    - nom: "Rééducation comportementale"
+      tarif: "Sur devis"
+      image: "prestation-reeducation.jpg"
+      accueil: true
+      devis: true
+      description: "Des incompréhensions entre l'homme et le cheval peuvent amener à l'apparition de comportements non souhaités, voire dangereux. Le but est ici de comprendre pourquoi le cheval a développé ces comportements et de lui apprendre ceux souhaités."
+      details: "Les exemples de rééducation sont nombreux et variés : embarquement, peur au montoir, agressivité, stress et anxiété…"
+
+  deplacements:
+    titre: "Déplacements"
+    texte: "J'interviens près d'Orléans et en Île-de-France, ainsi que dans d'autres régions sur demande. Les frais de déplacement sont facturés {frais_km}, calculés depuis {ville_depart}."
+  mention_tva: "Tous les tarifs sont indiqués nets – TVA non applicable, art. 293 B du CGI."
+
+  appel:
+    titre: "Une question, un projet ?"
+    texte: "Demandez un devis personnalisé ou contactez-moi pour en parler."
+    bouton: "Demander un devis"
+
+# ── Page Contact ───────────────────────────────────────────
+contact:
+  banniere:
+    image: "banniere-contact.jpg"
+    # Partie de la photo à garder visible : "haut", "centre" ou "bas"
+    cadrage: "centre"
+    image_alt: "Cheval bai sellé tenu en main"
+    surtitre: "Contact"
+    titre: "Parlons de votre cheval"
+  intro: "Pour toute demande de renseignement ou de devis, appelez-moi ou laissez un message : je vous réponds rapidement."
+  coordonnees_titre: "Coordonnées"
+  libelle_telephone: "Téléphone"
+  libelle_email: "E-mail"
+  libelle_zone: "Zone d'intervention"
+  zone: "Proche Orléans / Île-de-France, autres sur demande"
+  libelle_reseaux: "Réseaux sociaux"
+
+  formulaire:
+    titre: "Envoyer un message"
+    nom: "Nom et prénom"
+    email: "Adresse e-mail"
+    telephone: "Téléphone (facultatif)"
+    objet: "Objet de la demande"
+    objet_choisir: "Choisissez un objet"
+    objets:
+      - valeur: "renseignement"
+        libelle: "Demande de renseignement"
+      - valeur: "devis"
+        libelle: "Demande de devis"
+      - valeur: "prestation"
+        libelle: "Réserver une prestation"
+      - valeur: "autre"
+        libelle: "Autre"
+    message: "Message"
+    consentement: "J'accepte que mes données soient utilisées pour répondre à ma demande, conformément à la"
+    consentement_lien: "politique de confidentialité"
+    envoyer: "Envoyer le message"
+    envoi_en_cours: "Envoi en cours…"
+    succes_titre: "Merci, votre message a bien été envoyé."
+    succes_texte: "Je vous réponds dans les meilleurs délais."
+    erreur: "Le message n'a pas pu être envoyé. Merci de réessayer ou de me contacter directement par téléphone ou par e-mail."
+    erreur_champs: "Merci de remplir correctement les champs obligatoires."
+    obligatoire: "Champs obligatoires"
+
+# ── Pages légales ──────────────────────────────────────────
+# Les valeurs entre accolades {…} sont remplacées automatiquement
+# par celles de contenu/site.yaml.
+mentions:
+  titre: "Mentions légales"
+  sections:
+    - titre: "Éditrice du site"
+      texte: |
+        {nom} – {nom_site}
+        {statut}
+        SIRET : {siret}
+        Adresse : {adresse}
+        Téléphone : {telephone}
+        E-mail : {email}
+        {mention_tva}
+    - titre: "Directrice de la publication"
+      texte: "{nom}"
+    - titre: "Hébergement"
+      texte: |
+        Vercel Inc.
+        440 N Barranca Ave #4133, Covina, CA 91723, États-Unis
+        https://vercel.com
+    - titre: "Propriété intellectuelle"
+      texte: "L'ensemble des contenus de ce site (textes, photographies, logo) est la propriété de {nom}, sauf mention contraire. Toute reproduction sans autorisation préalable est interdite."
+    - titre: "Responsabilité"
+      texte: "Les informations présentes sur ce site sont fournies à titre indicatif et peuvent être modifiées à tout moment. Les tarifs affichés peuvent évoluer ; seul le devis ou la confirmation écrite fait foi."
+
+confidentialite:
+  titre: "Politique de confidentialité"
+  sections:
+    - titre: "Responsable du traitement"
+      texte: "{nom} – {nom_site}, {adresse}. Contact : {email}."
+    - titre: "Données collectées"
+      texte: "Le formulaire de contact recueille votre nom, votre adresse e-mail, votre numéro de téléphone (facultatif), l'objet de votre demande et votre message. Ces données sont utilisées uniquement pour répondre à votre demande, sur la base de votre consentement."
+    - titre: "Transmission et conservation"
+      texte: "Les messages sont transmis par e-mail via le service Resend (sous-traitant technique) et ne sont pas enregistrés sur le site. Ils sont conservés dans la messagerie de {nom} le temps nécessaire au traitement de votre demande et au maximum 3 ans après le dernier contact. Ils ne sont jamais vendus ni cédés."
+    - titre: "Cookies"
+      texte: "Ce site n'utilise aucun cookie de suivi ou de mesure d'audience. Les polices de caractères sont hébergées sur le site lui-même : aucune donnée n'est transmise à des services tiers lors de votre visite."
+    - titre: "Vos droits"
+      texte: "Conformément au RGPD, vous disposez d'un droit d'accès, de rectification, d'effacement, d'opposition et de limitation du traitement de vos données. Pour l'exercer, écrivez à {email}. Vous pouvez également introduire une réclamation auprès de la CNIL (www.cnil.fr)."
+
+# ── Pied de page ───────────────────────────────────────────
+pied:
+  accroche: "Débourrage, éducation et travail du cheval."
+  navigation: "Navigation"
+  coordonnees: "Coordonnées"
+  suivre: "Suivre"
+  mentions: "Mentions légales"
+  confidentialite: "Politique de confidentialité"
+  droits: "Tous droits réservés."
